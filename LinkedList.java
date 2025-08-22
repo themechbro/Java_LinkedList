@@ -189,5 +189,48 @@ public void swapPairs() {
     }
     head = dummy.next;
 }
-  
+  public void partitionList(int x) {
+    Node dummy1 = new Node(0);
+    Node dummy2 = new Node(0);
+    Node prev1 = dummy1;
+    Node prev2 = dummy2;
+    Node temp = head;
+    while (temp != null && temp.next != null) {
+        if (temp.value < x) {
+            prev1.next = temp;
+            prev1 = temp;
+        } else {
+            prev2.next = temp;
+            prev2 = temp;
+        }
+        temp = temp.next;
+
+    }
+    prev2.next = null;
+    prev1.next = dummy2.next;
+    head = dummy1.next;
+}
+
+public void reverseBetween(int startIndex, int endIndex) {
+    if (head == null)
+        return;
+    Node dummy = new Node(0);
+    dummy.next = head;
+    Node prev = head;
+    for (int i = 0; i < startIndex; i++) {
+        prev = prev.next;
+    }
+    Node current = prev.next;
+
+    for (int i = 0; i < endIndex - startIndex; i++) {
+        Node toMove = current.next;
+        
+        current.next = toMove.next;
+        toMove.next = prev.next;
+        prev.next = toMove;
+    }
+    head = dummy.next;
+}
+
+
 }
